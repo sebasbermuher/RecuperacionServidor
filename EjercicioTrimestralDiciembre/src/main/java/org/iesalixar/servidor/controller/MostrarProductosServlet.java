@@ -3,24 +3,22 @@ package org.iesalixar.servidor.controller;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.iesalixar.servidor.dao.DAOProductLineImpl;
+import org.iesalixar.servidor.dao.DAOProductImpl;
 
 /**
- * Servlet implementation class InicioServlet
+ * Servlet implementation class MostrarProductosServlet
  */
-
-public class InicioServlet extends HttpServlet {
+public class MostrarProductosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public InicioServlet() {
+	public MostrarProductosServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -31,11 +29,12 @@ public class InicioServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		DAOProductLineImpl dao = new DAOProductLineImpl();
+		String categoria = (String) request.getParameter("productLine");
+		DAOProductImpl dao = new DAOProductImpl();
 
-		request.setAttribute("categorias", dao.getCategorias());
+		request.setAttribute("categoria", categoria);
+		request.setAttribute("productos", dao.getProduct(categoria));
 
-		request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/mostrarProductos.jsp").forward(request, response);
 	}
-
 }

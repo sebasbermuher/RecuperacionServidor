@@ -1,6 +1,7 @@
 package org.iesalixar.servidor.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.iesalixar.servidor.model.ProductLine;
 
@@ -15,4 +16,6 @@ public interface DAOProductLine {
 	public boolean removeProductLine(String productLine);
 
 	public boolean createProductLine(ProductLine productLine);
+	
+	public List<ProductLine> getCategorias();
 }

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.iesalixar.servidor.bd.PoolDB;
 import org.iesalixar.servidor.model.ProductLine;
@@ -192,6 +193,39 @@ public class DAOProductLineImpl implements DAOProductLine {
 
 		return (resultado == 0 ? false : true);
 
+	}
+
+	@Override
+	public List<ProductLine> getCategorias() {
+
+		ArrayList<ProductLine> categoriasList = new ArrayList<>();
+		ProductLine productLines = null;
+		Connection con = null;
+
+		try {
+			String sql = "select productLine from productlines";
+			PoolDB pool = new PoolDB();
+
+			con = pool.getConnection();
+
+			PreparedStatement statement = con.prepareStatement(sql);
+
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next()) {
+
+				productLines = new ProductLine();
+
+				productLines.setProductLine(rs.getString("productLine"));
+
+				categoriasList.add(productLines);
+
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+
+		return categoriasList;
 	}
 
 }

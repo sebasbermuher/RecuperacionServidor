@@ -3,24 +3,27 @@ package org.iesalixar.servidor.controller;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.iesalixar.servidor.dao.DAOProductLineImpl;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.iesalixar.servidor.dao.DAOUsuarioImpl;
+import org.iesalixar.servidor.model.Usuario;
 
 /**
- * Servlet implementation class InicioServlet
+ * Servlet implementation class Logout
  */
-
-public class InicioServlet extends HttpServlet {
+public class LogOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = Logger.getLogger(LogOutServlet.class);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public InicioServlet() {
+	public LogOutServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -31,11 +34,11 @@ public class InicioServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		DAOProductLineImpl dao = new DAOProductLineImpl();
+		HttpSession sesion = request.getSession();
+		sesion.invalidate();
+		logger.log(Level.INFO, "Usuario desconectado.");
 
-		request.setAttribute("categorias", dao.getCategorias());
-
-		request.getRequestDispatcher("WEB-INF/view/index.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath());
 	}
 
 }

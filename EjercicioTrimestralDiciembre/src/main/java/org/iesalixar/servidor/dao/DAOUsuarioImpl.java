@@ -20,7 +20,7 @@ public class DAOUsuarioImpl implements DAOUsuario {
 		Connection con = null;
 
 		try {
-			String sql = "select * from usuarios where usuario=?";
+			String sql = "select * from usuarios where email=?";
 			PoolDB pool = new PoolDB();
 
 			con = pool.getConnection();

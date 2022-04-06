@@ -13,7 +13,7 @@ import org.iesalixar.servidor.model.Oficinas;
 public class DAOOficinaImpl implements DAOOficina {
 
 	@Override
-	public List<Oficinas> getAllOficinas() {
+	public ArrayList<Oficinas> getAllOficinas() {
 		ArrayList<Oficinas> oficinasList = new ArrayList<>();
 		Oficinas oficina = null;
 		Connection con = null;

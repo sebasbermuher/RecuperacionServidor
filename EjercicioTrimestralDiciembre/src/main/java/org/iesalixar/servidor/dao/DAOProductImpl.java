@@ -13,6 +13,54 @@ import org.iesalixar.servidor.model.Productos;
 public class DAOProductImpl implements DAOProduct {
 
 	@Override
+	public ArrayList<Productos> getProduct(String categoria) {
+		ArrayList<Productos> productsList = new ArrayList<>();
+		Productos product;
+		Connection con = null;
+
+		try {
+
+			String sql = "select * from products where productLine=?";
+			PoolDB pool = new PoolDB();
+			con = pool.getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.setString(1, categoria);
+
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next()) {
+
+				product = new Productos();
+
+				product.setProductCode(rs.getString("productCode"));
+				product.setProductName(rs.getString("productName"));
+				product.setProductLine(rs.getString("productLine"));
+				product.setProductScale(rs.getNString("productScale"));
+				product.setProductVendor(rs.getString("productVendor"));
+				product.setProductDescription(rs.getString("productDescription"));
+				product.setQuantityInStock(rs.getInt("quantityInStock"));
+				product.setBuyPrice(rs.getDouble("buyPrice"));
+				product.setMsrp(rs.getDouble("MSRP"));
+
+				productsList.add(product);
+
+			}
+
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+
+		return productsList;
+
+	}
+
+	@Override
 	public Productos getProducts(String productCode) {
 		Productos product = null;
 		Connection con = null;

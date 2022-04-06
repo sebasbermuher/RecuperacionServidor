@@ -1,12 +1,12 @@
 package org.iesalixar.servidor.dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.iesalixar.servidor.model.Oficinas;
 
 public interface DAOOficina {
 	
-	public List<Oficinas> getAllOficinas();
+	public ArrayList<Oficinas> getAllOficinas();
 	public Oficinas getOffice(String officeCode);
 	public Oficinas getOficinas(String city);
 
