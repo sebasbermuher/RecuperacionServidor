@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.iesalixar.servidor.dao.DAOEmployeeImpl;
 import org.iesalixar.servidor.dao.DAOOficinaImpl;
 import org.iesalixar.servidor.model.Employee;
+import org.iesalixar.servidor.model.Oficinas;
 
 /**
  * Servlet implementation class EmpleadosServlet
@@ -32,15 +33,15 @@ public class EmpleadosServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		DAOEmployeeImpl daoImpl = new DAOEmployeeImpl();
-		DAOOficinaImpl dao = new DAOOficinaImpl();
-
-		request.setAttribute("offices", dao.getAllOficinas());
-
-		ArrayList<Employee> listaEmployees = (ArrayList) daoImpl.getAllEmployees();
+		DAOEmployeeImpl daoEmployee = new DAOEmployeeImpl();
+		ArrayList<Employee> listaEmployees = (ArrayList) daoEmployee.getAllEmployees();
+				
+		DAOOficinaImpl daoOficina = new DAOOficinaImpl();
+		ArrayList<Oficinas> oficinas = daoOficina.getAllOficinas();
 
 		request.setAttribute("employee", listaEmployees);
-
+		request.setAttribute("offices", oficinas);
+		
 		request.getRequestDispatcher("../WEB-INF/view/admin/mostrarEmpleados.jsp").forward(request, response);
 	}
 

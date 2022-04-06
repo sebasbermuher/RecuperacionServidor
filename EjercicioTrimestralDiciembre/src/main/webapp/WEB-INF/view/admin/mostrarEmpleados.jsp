@@ -15,13 +15,16 @@
 	<jsp:include page="../include/barra.jsp" />
 	
 	<div class="container mt-5">
-		<h1>EMPLEADOS</h1>
+		
 
 		<div class="row justify-content-end">
-			<div class="col-2">
-				<a class="btn btn-primary w-100" href="AddEmpleado">AÑADIR
-					EMPLEADO</a>
+			<div class="col-3">
+				<a class="btn btn-primary w-100" href="AddEmpleado">AÑADIR EMPLEADO</a>
 			</div>
+		</div>
+		
+		<div class="col-12">
+			<h1 class="text-center">EMPLEADOS</h1>
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-10">
@@ -44,7 +47,22 @@
 								<td>${e.firstName}</td>
 								<td>${e.jobTitle}</td>
 								<%-- <td>${e.officeCode}</td>
-								<td>${e.jefe}</td> --%>
+								<td>${e.reportsTo}</td>  --%>
+								
+								<td>
+									<c:forEach items="${offices}" var="ofi">
+									<c:if test="${e.officeCode == ofi.officeCode}">
+										${ofi.city}
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+									<c:forEach items="${employee }" var="emplo">
+									<c:if test="${e.reportsTo == emplo.employeeNumber }">
+										${emplo.firstName } ${emplo.lastName }
+									</c:if>
+								</c:forEach>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
