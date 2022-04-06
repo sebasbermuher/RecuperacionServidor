@@ -47,6 +47,7 @@ public class FiltroUsuario implements Filter {
 		if (!sesion.isNew() && usuario != null && role.equals("user")) {
 			chain.doFilter(request, response);
 		} else {
+			sesion.invalidate();
 			httpResponse.sendRedirect(httpRequest.getContextPath());
 		}
 	}

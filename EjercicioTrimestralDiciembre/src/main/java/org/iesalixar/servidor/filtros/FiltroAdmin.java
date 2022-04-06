@@ -46,7 +46,8 @@ public class FiltroAdmin implements Filter {
 		if (!sesion.isNew() && usuario!=null && role.equals("admin")) {
 			chain.doFilter(request, response);
 		} else {
-		  httpResponse.sendRedirect(httpRequest.getContextPath());
+			sesion.invalidate();
+			httpResponse.sendRedirect(httpRequest.getContextPath());
 		}
 	}
 
