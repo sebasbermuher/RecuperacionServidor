@@ -45,22 +45,19 @@
 								<td>${e.employeeNumber}</td>
 								<td>${e.lastName}</td>
 								<td>${e.firstName}</td>
-								<td>${e.jobTitle}</td>
-								<%-- <td>${e.officeCode}</td>
-								<td>${e.reportsTo}</td>  --%>
-								
+								<td>${e.jobTitle}</td>						
 								<td>
 									<c:forEach items="${offices}" var="ofi">
-									<c:if test="${e.officeCode == ofi.officeCode}">
-										${ofi.city}
-									</c:if>
+										<c:if test="${e.officeCode == ofi.officeCode}">
+											${ofi.city}
+										</c:if>
 								</c:forEach>
 								</td>
 								<td>
-									<c:forEach items="${employee }" var="emplo">
-									<c:if test="${e.reportsTo == emplo.employeeNumber }">
-										${emplo.firstName } ${emplo.lastName }
-									</c:if>
+									<c:forEach items="${employee}" var="emplo">
+										<c:if test="${e.reportsTo == emplo.employeeNumber}">
+											${emplo.firstName} ${emplo.lastName}
+										</c:if>
 								</c:forEach>
 								</td>
 							</tr>
