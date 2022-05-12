@@ -36,10 +36,6 @@ public class AddProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		DAOEmployeeImpl daoEmployee = new DAOEmployeeImpl();
-//		ArrayList<Employee> empleados = daoEmployee.getAllEmployees();
-//		request.setAttribute("empleados", empleados);
-
 		DAOProductLineImpl daoPL = new DAOProductLineImpl();
 		ArrayList<ProductLine> pl = daoPL.getAllProductLine();
 		request.setAttribute("pl", pl);
@@ -53,7 +49,7 @@ public class AddProductServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		Productos product = new Productos();
 		DAOProductImpl daoProduct = new DAOProductImpl();
 
@@ -67,23 +63,37 @@ public class AddProductServlet extends HttpServlet {
 		Double buyPrice = Double.parseDouble(request.getParameter("buyPrice"));
 		Double MSRP = Double.parseDouble(request.getParameter("MSRP"));
 
-//		if (productCode != null && productName != null && productLine != null && productScale != null
-//				&& productVendor != null && productDescription != null && quantityInStock != 0 && buyPrice != 0.0
-//				&& MSRP != 0.0) {
+		if (productCode != null && productName != null && productLine != null && productScale != null
+				&& productVendor != null && productDescription != null && quantityInStock != 0 && buyPrice != 0.0
+				&& MSRP != 0.0) {
 
-		product.setProductCode(productCode);
-		product.setProductName(productName);
-		product.setProductLine(productLine);
-		product.setProductScale(productScale);
-		product.setProductVendor(productVendor);
-		product.setProductDescription(productDescription);
-		product.setQuantityInStock(quantityInStock);
-		product.setBuyPrice(buyPrice);
-		product.setMsrp(MSRP);
+			product.setProductCode(productCode);
+			product.setProductName(productName);
+			product.setProductLine(productLine);
+			product.setProductScale(productScale);
+			product.setProductVendor(productVendor);
+			product.setProductDescription(productDescription);
+			product.setQuantityInStock(quantityInStock);
+			product.setBuyPrice(buyPrice);
+			product.setMsrp(MSRP);
 
-		daoProduct.insertProduct(product);
+			daoProduct.insertProduct(product);
 
-		response.sendRedirect(request.getContextPath() + "/Home");
+			request.setAttribute("error", "Producto añadido correctamente.");
+
+			doGet(request, response);
+			return;
+
+			// response.sendRedirect(request.getContextPath() + "/Home");
+
+		} else {
+
+			request.setAttribute("error", "Error al añadir el producto.");
+
+			doGet(request, response);
+			return;
+		}
+
 	}
 
 }

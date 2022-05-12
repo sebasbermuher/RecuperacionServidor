@@ -345,7 +345,7 @@ public class DAOProductImpl implements DAOProduct {
 			PreparedStatement statement = con.prepareStatement(sql);
 			statement.setString(1, product.getProductCode());
 			statement.setString(2, product.getProductName());
-			statement.setString(3, "");
+			statement.setString(3, product.getProductLine());
 			statement.setString(4, product.getProductScale());
 			statement.setString(5, product.getProductVendor());
 			statement.setString(6, product.getProductDescription());

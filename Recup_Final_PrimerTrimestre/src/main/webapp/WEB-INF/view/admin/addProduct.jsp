@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Añadir Product</title>
+<title>Añadir Producto</title>
 </head>
 <body>
 	<fmt:setBundle basename="interface" />
@@ -17,7 +17,11 @@
 
 		 <div class="row justify-content-center mt-3">
 			<div class="col-6">
-				<form method="post">		
+				<form method="post">
+				
+					<c:if test="${error!=null}">
+						<p class="text-danger text-small mt-3">${error}</p>
+					</c:if>	
 				
 					<label for="productCode" class="form-label mt-3">Product Code</label>
 		    		<input type="text" class="form-control" id="productCode" name="productCode" required >
@@ -25,12 +29,12 @@
 		    		<label for="productName" class="form-label mt-3">Product Name</label>
 		    		<input type="text" class="form-control" id="productName" name="productName" required >
 		    		
-		    		<%-- <label for="productLine" class="form-label mt-3">Product Line</label>
+		    		<label for="productLine" class="form-label mt-3">Product Line</label>
 		    		<select name="productLine" class="form-select">
     					<c:forEach  items="${pl}" var="proLine">
-							<option value="${eproLine.productLine}"> ${proLine.productLine }</option>
+							<option value="${proLine.productLine}"> ${proLine.productLine }</option>
 						</c:forEach>
-    				</select> --%>
+    				</select>
 		    		
 		    		<label for="productScale" class="form-label mt-3">Product Scale</label>
 		    		<input type="text" class="form-control" id="productScale" name="productScale" required >
@@ -45,20 +49,15 @@
 		    		<input type="number" class="form-control" id="quantityInStock" name="quantityInStock" required >
 		    		
 		    		<label for="buyPrice" class="form-label mt-3">Buy Price</label>
-		    		<input type="number" class="form-control" id="buyPrice" name="buyPrice" required >
+		    		<input type="number" step="any" class="form-control" id="buyPrice" name="buyPrice" required >
 		    		
 		    		<label for="MSRP" class="form-label mt-3">MSRP</label>
-		    		<input type="number" class="form-control" id="MSRP" name="MSRP" required >
+		    		<input type="number" step="any" class="form-control" id="MSRP" name="MSRP" required >
 		    		
-		    				    		
-		    		<%-- <label for="salesRepEmployeeNumber" class="form-label mt-3">Empleado</label>
-		    		<select name="salesRepEmployeeNumber" class="form-select">
-    					<c:forEach  items="${empleados}" var="e">
-							<option value="${e.employeeNumber}"> ${e.lastName } , ${e.firstName }</option>
-						</c:forEach>
-    				</select> --%>
-		    		
-		    							
+					<c:if test="${error!=null}">
+						<p class="text-danger text-small mt-3">${error}</p>
+					</c:if>	
+								    							
 					<input type="submit" class="btn btn-primary w-100 mt-3" value="CREATE PRODUCT" />
 					
 					

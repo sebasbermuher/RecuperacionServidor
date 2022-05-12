@@ -6,29 +6,30 @@ public class OrderDetail implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Productos products;
+	private Productos product;
 	private int quantityOrdered;
 	private double priceEach;
 	private int orderLineNumber;
+	private String productName;
 
 	public OrderDetail() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrderDetail(Productos products, int quantityOrdered, double priceEach, int orderLineNumber) {
+	public OrderDetail(Productos product, int quantityOrdered, double priceEach, int orderLineNumber) {
 		super();
-		this.products = products;
+		this.product = product;
 		this.quantityOrdered = quantityOrdered;
 		this.priceEach = priceEach;
 		this.orderLineNumber = orderLineNumber;
 	}
 
-	public Productos getProducts() {
-		return products;
+	public Productos getProduct() {
+		return product;
 	}
 
-	public void setProducts(Productos products) {
-		this.products = products;
+	public void setProduct(Productos product) {
+		this.product = product;
 	}
 
 	public int getQuantityOrdered() {
@@ -53,6 +54,14 @@ public class OrderDetail implements Serializable {
 
 	public void setOrderLineNumber(int orderLineNumber) {
 		this.orderLineNumber = orderLineNumber;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 }

@@ -203,4 +203,35 @@ public class DAOOrderImpl implements DAOOrder {
 
 	}
 
+	@Override
+	public boolean updateCustomerOrder(int orderNumber, int customerNumber) {
+		int resultado = 0;
+		Connection con = null;
+
+		try {
+
+			String sql = "UPDATE orders SET customerNumber = ? WHERE orderNumber = ?";
+			PoolDB pool = new PoolDB();
+			con = pool.getConnection();
+			PreparedStatement statement = con.prepareStatement(sql);
+
+			statement.setInt(1, customerNumber);
+			statement.setInt(2, orderNumber);
+
+			resultado = statement.executeUpdate();
+
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return (resultado == 0 ? false : true);
+	}
+
 }

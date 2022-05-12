@@ -26,15 +26,20 @@
 		<servlet-name>InicioServlet</servlet-name>
 		<servlet-class>org.iesalixar.servidor.controller.InicioServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>AddProductServlet</servlet-name>
 		<servlet-class>org.iesalixar.servidor.controller.AddProductServlet</servlet-class>
 	</servlet>
 
 	<servlet>
-		<servlet-name>CustomerReportServlet</servlet-name>
-		<servlet-class>org.iesalixar.servidor.controller.CustomerReportServlet</servlet-class>
+		<servlet-name>ChangeOrderCustomerServlet</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.ChangeOrderCustomerServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>OrderReportServlet</servlet-name>
+		<servlet-class>org.iesalixar.servidor.controller.OrderReportServlet</servlet-class>
 	</servlet>
 
 	<servlet>
@@ -71,8 +76,13 @@
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>CustomerReportServlet</servlet-name>
-		<url-pattern>/CustomerReport</url-pattern>
+		<servlet-name>ChangeOrderCustomerServlet</servlet-name>
+		<url-pattern>/Admin/ChangeOrderCustomer</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>OrderReportServlet</servlet-name>
+		<url-pattern>/OrderReport</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
@@ -87,9 +97,6 @@
 
 
 
-	<!-- <servlet-mapping> <servlet-name>EmpleadosServlet</servlet-name> <url-pattern>/Admin/Empleados</url-pattern> 
-		</servlet-mapping> <servlet-mapping> <servlet-name>AddEmpleadoServlet</servlet-name> 
-		<url-pattern>/Admin/AddEmpleado</url-pattern> </servlet-mapping> -->
 
 	<!-- FILTROS -->
 
@@ -105,14 +112,14 @@
 
 	<filter-mapping>
 		<filter-name>FiltroAdmin</filter-name>
-		<servlet-name>AddCustomerServlet</servlet-name>
-		<url-pattern>/Admin/AddCustomer</url-pattern>
-		<servlet-name>ChangeAssigmentServlet</servlet-name>
-		<url-pattern>/Admin/ChangeAssigment</url-pattern>
+		<servlet-name>AddProductServlet</servlet-name>
+		<url-pattern>/Admin/AddProduct</url-pattern>
+		<servlet-name>ChangeOrderCustomerServlet</servlet-name>
+		<url-pattern>/Admin/ChangeOrderCustomer</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>FiltroUsuario</filter-name>
-		<servlet-name>CustomerReportServlet</servlet-name>
-		<url-pattern>/CustomerReport</url-pattern>
+		<servlet-name>OrderReportServlet</servlet-name>
+		<url-pattern>/OrderReport</url-pattern>
 	</filter-mapping>
 </web-app>

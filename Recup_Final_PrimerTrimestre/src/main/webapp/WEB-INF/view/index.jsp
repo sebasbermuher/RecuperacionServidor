@@ -38,11 +38,11 @@
 							<td>${o.status}</td>
 							<td><c:if test="${sessionScope.role eq 'user'}">
 									<a
-										href="${pageContext.request.contextPath}/CustomerReport?cn=${o.orderNumber}"><i
+										href="${pageContext.request.contextPath}/OrderReport?orderNumber=${o.orderNumber}"><i
 										class="bi bi-eye-fill"></i></a>
 								</c:if> <c:if test="${sessionScope.role eq 'admin'}">
 									<a
-										href="${pageContext.request.contextPath}/Admin/ChangeAssigment?cn=${o.orderNumber}"><i
+										href="${pageContext.request.contextPath}/Admin/ChangeOrderCustomer?orderNumber=${o.orderNumber}"><i
 										class="bi bi-person-circle"></i></a>
 								</c:if>
 							</td>

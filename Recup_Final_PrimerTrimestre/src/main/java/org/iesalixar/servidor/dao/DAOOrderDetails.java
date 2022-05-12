@@ -7,4 +7,6 @@ import org.iesalixar.servidor.model.OrderDetail;
 public interface DAOOrderDetails {
 	
 	public ArrayList<OrderDetail> getDetailsFromOrder(int orderNumber);
+	public ArrayList<OrderDetail> getAllOrderDetailsFromOrder(int orderNumber);
+
 }
