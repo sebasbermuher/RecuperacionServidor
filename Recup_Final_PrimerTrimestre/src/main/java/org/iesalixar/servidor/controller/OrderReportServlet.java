@@ -8,10 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.iesalixar.servidor.dao.DAOOrder;
 import org.iesalixar.servidor.dao.DAOOrderDetails;
 import org.iesalixar.servidor.dao.DAOOrderDetailsImpl;
 import org.iesalixar.servidor.dao.DAOOrderImpl;
+import org.iesalixar.servidor.model.Customer;
 import org.iesalixar.servidor.model.Order;
 import org.iesalixar.servidor.model.OrderDetail;
 
@@ -20,6 +23,8 @@ import org.iesalixar.servidor.model.OrderDetail;
  */
 public class OrderReportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = Logger.getLogger(OrderReportServlet.class);
+
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -41,11 +46,16 @@ public class OrderReportServlet extends HttpServlet {
 		DAOOrderDetails daoOrderDetails = new DAOOrderDetailsImpl();
 		
 		Order order = daoOrder.getOrder(Integer.parseInt(orderNumber));
-		ArrayList<OrderDetail> orderDetails = daoOrderDetails.getAllOrderDetailsFromOrder(Integer.parseInt(orderNumber));
+		ArrayList<OrderDetail> orderDetails = daoOrderDetails.getDetailsFromOrder(Integer.parseInt(orderNumber));
 		
 		request.setAttribute("order", order);
 		request.setAttribute("orderDetails", orderDetails);
 		request.getRequestDispatcher("/WEB-INF/view/orderReport.jsp").forward(request, response);
+		
+		
+		
+		Order orderLog = daoOrder.getOrder(Integer.parseInt(orderNumber));
+		logger.log(Level.INFO, "Se ha consultado los productos del pedido número : "+ orderLog.getOrderNumber());
 
 	}
 

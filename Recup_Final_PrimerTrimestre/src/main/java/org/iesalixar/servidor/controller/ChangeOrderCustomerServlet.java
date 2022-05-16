@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.iesalixar.servidor.dao.DAOCustomer;
 import org.iesalixar.servidor.dao.DAOCustomerImpl;
 import org.iesalixar.servidor.dao.DAOOrder;
@@ -20,6 +22,7 @@ import org.iesalixar.servidor.model.Order;
  */
 public class ChangeOrderCustomerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = Logger.getLogger(ChangeOrderCustomerServlet.class);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -48,6 +51,7 @@ public class ChangeOrderCustomerServlet extends HttpServlet {
 		request.setAttribute("customers", customers);
 
 		request.getRequestDispatcher("/WEB-INF/view/admin/changeOrderCustomer.jsp").forward(request, response);
+
 	}
 
 	/**
@@ -59,13 +63,25 @@ public class ChangeOrderCustomerServlet extends HttpServlet {
 
 		String orderNumber = (String) request.getParameter("orderNumber");
 		String customerNumber = (String) request.getParameter("customer");
-		
- 
+
 		if (customerNumber != null && orderNumber != null) {
 			DAOOrder daoOrder = new DAOOrderImpl();
 			daoOrder.updateCustomerOrder(Integer.parseInt(orderNumber), Integer.parseInt(customerNumber));
+
+// ----------------MENSAJE LOG-------------------------------------------------------------------
+			DAOOrder daoOrder2 = new DAOOrderImpl();
+			Order orderLog = daoOrder2.getOrder(Integer.parseInt(orderNumber));
+
+			DAOCustomer daoCustomer = new DAOCustomerImpl();
+			Customer cust = daoCustomer.getCustomer(Integer.parseInt(customerNumber));
+
+			logger.log(Level.INFO,
+					"Al pedido numero " + orderLog.getOrderNumber() + " se le ha cambiado el customer por "
+							+ cust.getCustomerNumber() + "---" + cust.getCustomerName());
+//------------------------------------------------------------------------------------------------------------
+
 			
-			if (daoOrder.updateCustomerOrder(Integer.parseInt(orderNumber), Integer.parseInt(customerNumber))==true) {
+			if (daoOrder.updateCustomerOrder(Integer.parseInt(orderNumber), Integer.parseInt(customerNumber)) == true) {
 				request.setAttribute("error", "Cliente cambiado correctamente.");
 
 				doGet(request, response);

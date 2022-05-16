@@ -20,25 +20,25 @@
 
 			<div class="row justify-content-center">
 				<div class="col-3">
-					<h2>Order Report</h2>
+					<h2><fmt:message key="orderReport" /></h2>
 				</div>
 			</div>
 
 			<div class="row justify-content-center">
 				<div class="col-12">
-					<h4>OrderCode: ${order.orderNumber}</h4>
+					<h4><fmt:message key="orderCode" />: ${order.orderNumber}</h4>
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">Product Name</th>
-								<th scope="col">Quantity</th>
-								<th scope="col">Price Each</th>
+								<th scope="col"><fmt:message key="productName" /></th>
+								<th scope="col"><fmt:message key="quantity" /></th>
+								<th scope="col"><fmt:message key="priceEach" /></th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${orderDetails}" var="o">
 								<tr>
-									<td>${o.productName}</td>
+									<td>${o.product.productName}</td>
 									<td>${o.quantityOrdered}</td>
 									<td>${o.priceEach}</td>
 							</c:forEach>

@@ -17,16 +17,26 @@
 	<div class="container mt-5">
 		<div class="row justify-content-center mt-5">
 			<div class="col-3">
-				<h3>Orders Table</h3>
+				<h3><fmt:message key="ordersTable" /></h3>
 			</div>
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
+					<c:if test="${sessionScope.role eq 'admin'}">
 						<th>OrderNumber</th>
 						<th>OrderDate</th>
 						<th>ShippedDate</th>
 						<th>Status</th>
 						<th>Opciones</th>
+					</c:if>
+					
+					<c:if test="${sessionScope.role eq 'user'}">
+						<th><fmt:message key="orderNumber" /></th>
+						<th><fmt:message key="orderDate" /></th>
+						<th><fmt:message key="shippedDate" /></th>
+						<th><fmt:message key="status" /></th>
+						<th><fmt:message key="options" /></th>
+					</c:if>
 					</tr>
 				</thead>
 				<tbody>
