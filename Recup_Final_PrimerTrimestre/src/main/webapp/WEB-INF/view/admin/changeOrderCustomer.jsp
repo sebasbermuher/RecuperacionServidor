@@ -40,6 +40,10 @@
 							</c:forEach>
 						</select> 
 						
+						 <c:if test="${correcto!=null}">
+							<p class="text-success text-small mt-3">${correcto}</p>
+						</c:if>	
+						
 						 <c:if test="${error!=null}">
 							<p class="text-danger text-small mt-3">${error}</p>
 						</c:if>	

@@ -62,37 +62,66 @@ public class AddProductServlet extends HttpServlet {
 		int quantityInStock = Integer.parseInt(request.getParameter("quantityInStock"));
 		Double buyPrice = Double.parseDouble(request.getParameter("buyPrice"));
 		Double MSRP = Double.parseDouble(request.getParameter("MSRP"));
+		
+		
+		product.setProductCode(productCode);
+		product.setProductName(productName);
+		product.setProductLine(productLine);
+		product.setProductScale(productScale);
+		product.setProductVendor(productVendor);
+		product.setProductDescription(productDescription);
+		product.setQuantityInStock(quantityInStock);
+		product.setBuyPrice(buyPrice);
+		product.setMsrp(MSRP);
 
-		if (productCode != null && productName != null && productLine != null && productScale != null
-				&& productVendor != null && productDescription != null && quantityInStock != 0 && buyPrice != 0.0
-				&& MSRP != 0.0) {
-
-			product.setProductCode(productCode);
-			product.setProductName(productName);
-			product.setProductLine(productLine);
-			product.setProductScale(productScale);
-			product.setProductVendor(productVendor);
-			product.setProductDescription(productDescription);
-			product.setQuantityInStock(quantityInStock);
-			product.setBuyPrice(buyPrice);
-			product.setMsrp(MSRP);
-
-			daoProduct.insertProduct(product);
-
-			request.setAttribute("error", "Producto añadido correctamente.");
-
+//		daoProduct.insertProduct(product);
+		
+		boolean añadido = daoProduct.insertProduct(product);
+		
+		if(añadido) {
+			
+			request.setAttribute("añadido", "Producto añadido correctamente.");
 			doGet(request, response);
 			return;
-
-			// response.sendRedirect(request.getContextPath() + "/Home");
-
-		} else {
-
-			request.setAttribute("error", "Error al añadir el producto.");
-
+			
+		}
+		else {
+			
+			request.setAttribute("error", "Codigo del producto existente.");
 			doGet(request, response);
 			return;
 		}
+
+//		if (productCode != null && productName != null && productLine != null && productScale != null
+//				&& productVendor != null && productDescription != null && quantityInStock != 0 && buyPrice != 0.0
+//				&& MSRP != 0.0) {
+//
+//			product.setProductCode(productCode);
+//			product.setProductName(productName);
+//			product.setProductLine(productLine);
+//			product.setProductScale(productScale);
+//			product.setProductVendor(productVendor);
+//			product.setProductDescription(productDescription);
+//			product.setQuantityInStock(quantityInStock);
+//			product.setBuyPrice(buyPrice);
+//			product.setMsrp(MSRP);
+//
+//			daoProduct.insertProduct(product);
+//
+//			request.setAttribute("error", "Producto añadido correctamente.");
+//
+//			doGet(request, response);
+//			return;
+//
+//			// response.sendRedirect(request.getContextPath() + "/Home");
+//
+//		} else {
+//
+//			request.setAttribute("error", "Error al añadir el producto.");
+//
+//			doGet(request, response);
+//			return;
+//		}
 
 	}
 

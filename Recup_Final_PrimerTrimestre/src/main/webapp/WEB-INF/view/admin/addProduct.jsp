@@ -19,12 +19,16 @@
 			<div class="col-6">
 				<form method="post">
 				
-					<c:if test="${error!=null}">
-						<p class="text-danger text-small mt-3">${error}</p>
+					<c:if test="${añadido!=null}">
+						<p class="text-success text-small mt-3">${añadido}</p>
 					</c:if>	
 				
 					<label for="productCode" class="form-label mt-3">Product Code</label>
 		    		<input type="text" class="form-control" id="productCode" name="productCode" required >
+		    		
+		    		<c:if test="${error!=null}">
+						<p class="text-danger text-small mt-3">${error}</p>
+					</c:if>
 		    		
 		    		<label for="productName" class="form-label mt-3">Product Name</label>
 		    		<input type="text" class="form-control" id="productName" name="productName" required >
@@ -54,8 +58,8 @@
 		    		<label for="MSRP" class="form-label mt-3">MSRP</label>
 		    		<input type="number" step="any" class="form-control" id="MSRP" name="MSRP" required >
 		    		
-					<c:if test="${error!=null}">
-						<p class="text-danger text-small mt-3">${error}</p>
+					<c:if test="${añadido!=null}">
+						<p class="text-success text-small mt-3">${añadido}</p>
 					</c:if>	
 								    							
 					<input type="submit" class="btn btn-primary w-100 mt-3" value="CREATE PRODUCT" />

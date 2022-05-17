@@ -82,7 +82,7 @@ public class ChangeOrderCustomerServlet extends HttpServlet {
 
 			
 			if (daoOrder.updateCustomerOrder(Integer.parseInt(orderNumber), Integer.parseInt(customerNumber)) == true) {
-				request.setAttribute("error", "Cliente cambiado correctamente.");
+				request.setAttribute("correcto", "Cliente cambiado correctamente.");
 
 				doGet(request, response);
 				return;
