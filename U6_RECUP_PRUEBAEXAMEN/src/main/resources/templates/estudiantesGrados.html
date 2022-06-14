@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Matricula')"></head>
+<body>
+	<header th:insert="fragments/parts::menu"></header>
+	<div class="container mt-2">
+		<div class="row mt-2 justify-content-center">
+			<div class="col-8 mt-1 mb-5">
+
+				<div class="row justify-content-center">
+					<h1 class="col-12">
+						Lista de Matriculas de <span th:text="${nombreGrado}"></span>
+					</h1>
+
+					<div th:if="${error!=null}" class="text-center mt-3 text-danger">GRADO
+						SIN MATRICULA</div>
+
+
+
+					<table th:if="${error==null}"
+						class="table table-stripped table-hover">
+						<thead class="table-light">
+							<tr>
+								<th>Asignatura</th>
+								<th>Alumno</th>
+								<th>Nota</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<span th:each="a : ${asignaturas}">
+								<tr th:each="aa : ${a.getAlumnosAsignatura()}">
+									<td th:text="${a.nombre}"></td>
+									<td th:text="${aa.alumno.nombre}+' '+${aa.alumno.apellido1}"></td>
+									<td th:text="${aa.nota}"></td>
+									<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/grados/estudiantes/editarnota(alum=${aa.getAlumno().getId()},(asig=${aa.getAsignatura().getId()}))}"><i class="bi bi-pencil-fill"></i></a></td>
+								</tr>
+							</span>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<footer th:replace="fragments/parts::footer(info='menu.matriculas')"></footer>
+</html>
