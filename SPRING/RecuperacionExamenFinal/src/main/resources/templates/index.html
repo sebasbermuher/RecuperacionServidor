@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Asignaturas')"></head>
+<body>
+	<header th:insert="fragments/parts::menu"></header>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+
+			<div class="col-12">
+				<h1 class="text-center mt-3">Gestión de Asignaturas</h1>
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>Nombre de Asignatura</th>
+							<th>Nombre de Grado</th>
+							<th>Nombre Profesor</th>
+							<th>Número de Alumnos Matriculados</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="a : ${asignatura}">
+							<td th:text="${a.getNombre()}"></td>
+							<td th:text="(${a.grado} != null) ? |${a.grado.nombre}| : 'X' ">
+							</td>
+							<td
+								th:text="(${a.profesor} != null) ? |${a.profesor.nombre},${a.profesor.apellido1} ${a.profesor.apellido2}| : '-,--' ">
+							</td>
+														
+							<td>x</td>
+
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+								th:href="@{'/matricula/add?asig='+${a.getId()}}"><i
+									class="bi bi-person-plus-fill"></i></a></td>
+
+							<td sec:authorize="isAuthenticated()"><a
+								th:href="@{'/matricula/list?codigo='+${a.getId()}}"><i
+									class="bi bi-people-fill"></i></a></td>
+
+							<td sec:authorize="isAuthenticated()"><a
+								th:href="@{'/matricula/report?asig='+${a.getId()}}"><i
+									class="bi bi-card-heading"></i></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

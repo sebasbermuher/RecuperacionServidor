@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head
+	th:replace="fragments/bootstrap::head(title='Matriculas de asignatura')"></head>
+<header th:insert="fragments/parts::menu"></header>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<div class="col-12">
+				<h3 class="text-center mt-3"
+					th:text="'Matricula de: '+${asignatura.nombre}"></h3>
+
+				<div th:if="${error!=null}" class="text-center mt-3 text-danger">ASIGNATURA
+					SIN MATRICULA</div>
+
+				<table th:if="${error==null}"
+					class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>Nombre</th>
+							<th>Apellido1</th>
+							<th>Apellido2</th>
+							<th>Nota</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="a : ${asignatura.alumnosAsignatura}">
+							<td th:text="${a.getAlumno().nombre}"></td>
+							<td th:text="${a.getAlumno().apellido1}"></td>
+							<td th:text="${a.getAlumno().apellido2}"></td>
+							<td th:text="${a.nota}"></td>
+							
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{|/matricula/list/delete?alumn=${a.alumno.id}&asig=${asignatura.id}}|"><i class="bi bi-x-square"></i></a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>
