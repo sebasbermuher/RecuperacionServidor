@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Editar Asignatura')"></head>
+<body>
+<header th:insert="fragments/parts::menu"></header>
+
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<div class="col-6">
+				<form th:action="@{/asignaturas/edit}" method="post"	th:object="${asignatura}">
+					
+					<label for="id" class="form-label mt-3">Id</label>
+					<input type="text" class="form-control" id="id" name="id"
+						th:field="*{id}" readonly>
+						
+					<label for="nombre" class="form-label mt-3">Nombre</label>
+					<input type="text" class="form-control" id="nombre" name="nombre"
+						th:field="*{nombre}" required>
+										
+					<label for="creditos" class="form-label mt-3">Creditos</label>
+					<input type="number" step="any" class="form-control" id="creditos" name="creditos"
+						th:field="*{creditos}" required>
+											
+					<label for="tipo" class="form-label mt-3">Tipo</label>
+					<select class="form-select" id="tipo" name="tipo" th:field="*{tipo}">
+						<option value="básica">Básica</option>
+  						<option value="obligatoria" >Obligatoria</option>
+  						<option value="optativa" >Optativa</option>
+					</select>
+						
+					<label for="curso" class="form-label mt-3">Curso</label>
+					<input type="number" class="form-control" id="curso" name="curso"
+						th:field="*{curso}" required>
+					
+					<label for="cuatrimestre" class="form-label mt-3">Cuatrimestre</label>
+					<input type="number" class="form-control" id="cuatrimestre" name="cuatrimestre"
+						th:field="*{cuatrimestre}" required>
+												
+					<label for="profesor" class="form-label mt-3">Profesor</label>	
+					<select name="profesor" class="form-select mt-3" th:field="*{profesor}">
+						<option th:each="p : ${profesor}" 
+                                th:value="${p.id} " 
+                                th:text="${p.nombre} + ' ' +${p.apellido1}"></option>
+					</select>
+					
+					<label for="grado" class="form-label mt-3">Grado</label>	
+					<select name="grado" class="form-select mt-3" th:field="*{grado}">
+						<option th:each="g : ${grado}" 
+                                th:value="${g.id} " 
+                                th:text="${g.nombre}"></option>
+					</select>
+									
+					<input type="submit" class="btn btn-primary w-100 mt-3" value="EDITAR" />
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

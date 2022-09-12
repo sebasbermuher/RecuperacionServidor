@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Departamentos')"></head>
+<body>
+	<header th:insert="fragments/parts::menu"></header>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+
+			<div class="col-12">
+				<h1 class="text-center mt-3">Departamentos</h1>
+
+				<a sec:authorize="hasRole('ROLE_ADMIN')"
+					th:href="@{../departamentos/addDepartamento}"
+					class="btn btn-primary btn-lg active" role="button">Añadir
+					Departamento</a>
+				 <a sec:authorize="hasRole('ROLE_ADMIN')"
+					th:href="@{../departamentos/asignarProfesor}"
+					class="btn btn-primary btn-lg active" role="button">Asignar
+					 Departamento a Profesor</a>
+			
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>ID</th>
+							<th>Nombre</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="d : ${departamentos}">
+							<td th:text="${d.getId()}"></td>
+							<td th:text="${d.getNombre()}"></td>
+
+							<td><a
+								th:href="@{'/departamentos/profesores?codigo='+${d.getId()}}"><i
+									class="bi bi-people-fill"></i></a></td>
+
+							<td><a th:href="@{'/departamentos/edit?depart='+${d.getId()}}"><i
+									class="bi bi-pen-fill"></i></a></td>
+								
+							<td><a th:href="@{'/departamentos/delete?departamento='+${d.getId()}}"><i
+									class="bi bi-trash-fill"></i> </a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

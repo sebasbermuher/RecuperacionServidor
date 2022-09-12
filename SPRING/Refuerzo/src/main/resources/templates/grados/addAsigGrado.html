@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/bootstrap::head(title='Asignar Asignatura a Grado')"></head>
+<body>
+<header th:insert="fragments/parts::menu"></header>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<div class="col-6">
+				<form th:action="@{/grados/addAsigGrado}" method="post"	th:object="${asigGrado}">
+					<label for="asignatura" class="form-label mt-3">Asignaturas</label>
+					<select name="asignatura" class="form-select mt-3"  th:field="*{id_asignatura}">
+                                <option th:each="a : ${asignaturas}" 
+                                th:value="${a.id} " 
+                                th:text="${a.nombre}" 
+                               ></option>
+                    </select>	
+					<label for="id_grado" class="form-label mt-3">Grados</label>
+					<select name="id_grado" class="form-select mt-3" >
+                                <option th:each="g : ${grados}" 
+                                th:value="${g.id} " 
+                                th:text="${g.nombre}" 
+                                 th:selected="(${id_grad} == ${g.id})"
+                               ></option>
+                    </select>					
+					<h6 class="text-danger" th:if="${error!=null}">Error</h6>	
+					
+					<input type="submit" class="btn btn-primary w-100 mt-3" value="Asignar" />	
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

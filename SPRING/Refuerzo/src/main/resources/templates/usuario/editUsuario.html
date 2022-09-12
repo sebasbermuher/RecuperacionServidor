@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Editar Usuario')"></head>
+<body>
+<header th:insert="fragments/parts::menu"></header>
+
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<div class="col-6">
+				<form th:action="@{/usuarios/edit}" method="post"	th:object="${usuario}">
+					
+					<label for="id" class="form-label mt-3">Id</label>
+					<input type="text" class="form-control" id="id" name="id"
+						th:field="*{id}" readonly>
+						
+					<label for="userName" class="form-label mt-3">Usuario</label>
+					<input type="text" class="form-control" id="userName" name="userName"
+						th:field="*{userName}" required>
+						
+					<label for="password" class="form-label mt-3">Password</label>
+					<input type="text" class="form-control" id="password" name="password"
+						th:field="*{password}" readonly>
+										
+					<label for="nombre" class="form-label mt-3">Nombre</label>
+					<input type="text" class="form-control" id="nombre" name="nombre"
+						th:field="*{nombre}" required>
+										
+					<label for="apellidos" class="form-label mt-3">Apellidos</label>
+					<input type="text" class="form-control" id="apellidos" name="apellidos"
+						th:field="*{apellidos}" required>
+						
+					<label for="email" class="form-label mt-3">Email</label>
+					<input type="text" class="form-control" id="email" name="email"
+						th:field="*{email}" required>
+					
+					<label for="role" class="form-label mt-3">Role</label>
+					<select class="form-select" id="role" name="role" th:field="*{role}">
+						<option value="ROLE_USER">ROLE_USER</option>
+  						<option value="ROLE_ADMIN">ROLE_ADMIN</option>
+					</select>
+					
+					<label for="activo" class="form-label mt-3">Activar/Desactivar</label>
+					<select class="form-select" id="activo" name="activo" th:field="*{activo}">
+						<option value="0">Desactivar</option>
+  						<option value="1">Activar</option>
+					</select>
+					
+					
+					<input type="submit" class="btn btn-primary w-100 mt-3" value="EDITAR" />
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

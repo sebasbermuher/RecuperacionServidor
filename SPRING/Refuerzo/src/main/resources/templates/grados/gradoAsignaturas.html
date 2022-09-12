@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head
+	th:replace="fragments/bootstrap::head(title='Asignaturas de Grado')"></head>
+<header th:insert="fragments/parts::menu"></header>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<div class="col-12">
+				<h3 class="text-center mt-3"
+					th:text="'Asignaturas de: '+${grado.nombre}"></h3>
+
+				<div th:if="${error!=null}" class="text-center mt-3 text-danger">GRADO
+					SIN ASIGNATURA ASIGNADAS</div>
+
+				<table th:if="${error==null}"
+					class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>ID</th>
+							<th>Nombre</th>
+							<th>Creditos</th>
+							<th>Tipo</th>
+							<th>Curso</th>
+							<th>Cuatrimestre</th>
+							<th>Profesor</th>
+							<th>Grado</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="g : ${grado.getAsignaturas()}">
+							<td th:text="${g.id}"></td>
+							<td th:text="${g.nombre}"></td>
+							<td th:text="${g.creditos}"></td>
+							<td th:text="${g.tipo}"></td>
+							<td th:text="${g.curso}"></td>
+							<td th:text="${g.cuatrimestre}"></td>
+							<td
+								th:text="(${g.profesor} != null) ? |${g.profesor.nombre} ${g.profesor.apellido1}| : 'sin profesor' ">
+							</td>
+							<td th:text="(${g.grado} != null) ? |${g.grado.nombre}| : 'X' ">
+							</td>
+							<td><a th:href="@{|/grados/asignaturas/delete?asig=${g.getId()}}|"><i class="bi bi-x-square"></i></a></td>	
+							
+							
+				
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

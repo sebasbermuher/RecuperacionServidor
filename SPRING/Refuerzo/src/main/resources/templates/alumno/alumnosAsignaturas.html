@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Asignaturas del alumno')"></head>
+<header th:insert="fragments/parts::menu"></header>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+
+
+
+			<div class="col-8">
+				<h3 class="text-center mt-3"
+					th:text="'Matricula de: '+${alumno.nombre}+' '+${alumno.apellido1}"></h3>
+					
+				<div th:if="${error!=null}" class="text-center mt-3 text-danger">ALUMNO SIN ASIGNATURAS ASIGNADAS</div>
+
+				<table th:if="${error==null}" class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>ID</th>
+							<th>Nombre</th>
+							<th>Creditos</th>
+							<th>Curso</th>
+							<th>Nota</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="a : ${alumno.alumnoAsignaturas}">
+							<td th:text="${a.getAsignatura().id}"></td>
+							<td th:text="${a.getAsignatura().nombre}"></td>
+							<td th:text="${a.getAsignatura().creditos}"></td>
+							<td th:text="${a.getAsignatura().curso}"></td>
+							<td th:text="${a.nota}"></td>
+							<td><a th:href="@{|/alumno/asignaturas/delete?asig=${a.asignatura.id}&alumn=${alumno.id}}|"><i class="bi bi-x-square"></i></a></td>
+						 	<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{'/alumnos/asignaturas/cambiarNota?codigo='+${a.getAlumno().id}+'&codigoAsignatura='+${a.getAsignatura().id}}"><i class="bi bi-pencil-fill"></i></a></td> 
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

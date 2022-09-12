@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head
+	th:replace="fragments/bootstrap::head(title='Profesores de asignatura')"></head>
+<header th:insert="fragments/parts::menu"></header>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<div class="col-12">
+				<h3 class="text-center mt-3"
+					th:text="'Profesor de: '+${asignatura.nombre}"></h3>
+
+				<div th:if="${error!=null}" class="text-center mt-3 text-danger">ASIGNATURA
+					SIN PROFESOR ASIGNADO</div>
+
+				<table th:if="${error==null}"
+					class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>ID</th>
+							<th>Nif</th>
+							<th>Nombre</th>
+							<th>Apellido1</th>
+							<th>Apellido2</th>
+							<th>Ciudad</th>
+							<th>Direccion</th>
+							<th>Telefono</th>
+							<th>Fecha Nacimiento</th>
+							<th>Sexo</th>
+							<th>Departamento</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="a : ${asignatura}">
+							<td th:text="${a.getProfesor().id}"></td>
+							<td th:text="${a.getProfesor().nif}"></td>
+							<td th:text="${a.getProfesor().nombre}"></td>
+							<td th:text="${a.getProfesor().apellido1}"></td>
+							<td th:text="${a.getProfesor().apellido2}"></td>
+							<td th:text="${a.getProfesor().ciudad}"></td>
+							<td th:text="${a.getProfesor().direccion}"></td>
+							<td th:text="${a.getProfesor().telefono}"></td>
+							<td th:text="${a.getProfesor().fechaNacimiento}"></td>
+							<td th:text="${a.getProfesor().sexo}"></td>
+							<td th:text="(${a.getProfesor().departamento} != null) ? |${a.getProfesor().departamento.nombre} | : 'Sin Departamento'"></td>				
+						 	<td><a th:href="@{|/asignaturas/profesores/delete?profe=${a.getProfesor().id}&asig=${a.id}}|"><i class="bi bi-x-square"></i></a></td>
+							
+						
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

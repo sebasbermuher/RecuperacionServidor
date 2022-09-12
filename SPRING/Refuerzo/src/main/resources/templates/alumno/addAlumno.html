@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Add Alumno')"></head>
+<body>
+<header th:insert="fragments/parts::menu"></header>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<div class="col-6">
+				<h4 class="text-danger" th:if="${error!=null}" th:text="${'Alumno (NIF) existente'}"></h4>
+			
+				<form th:action="@{/alumno/addAlumno}" method="post"	th:object="${alumnoDTO}">
+					
+					<label for="nif" class="form-label mt-3">Nif</label>
+					<input type="text" class="form-control" id="nif" name="nif"
+						th:field="*{nif}" required>
+						
+					<label for="nombre" class="form-label mt-3">Nombre</label>
+					<input type="text" class="form-control" id="nombre" name="nombre"
+						th:field="*{nombre}" required>
+										
+					<label for="apellido1" class="form-label mt-3">Apellido1</label>
+					<input type="text" class="form-control" id="apellido1" name="apellido1"
+						th:field="*{apellido1}" required>
+						
+					<label for="apellido2" class="form-label mt-3">Apellido2</label>
+					<input type="text" class="form-control" id="apellido2" name="apellido2"
+						th:field="*{apellido2}" required>
+						
+					<label for="ciudad" class="form-label mt-3">Ciudad</label>
+					<input type="text" class="form-control" id="ciudad" name="ciudad"
+						th:field="*{ciudad}" required>
+					
+					<label for="direccion" class="form-label mt-3">Direccion</label>
+					<input type="text" class="form-control" id="direccion" name="direccion"
+						th:field="*{direccion}" required>
+						
+					<label for="telefono" class="form-label mt-3">Telefono</label>
+					<input type="number" class="form-control" id="telefono" name="telefono"
+						th:field="*{telefono}" required>	
+					
+					<label for="fechaNacimiento" class="form-label mt-3">Fecha Nacimiento</label>
+					<input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento"
+						th:field="*{fechaNacimiento}" required>
+						
+					<label for="sexo" class="form-label mt-3">Sexo</label>
+					<select class="form-select" id="sexo" name="sexo" th:field="*{sexo}">
+						<option value="M">Mujer</option>
+  						<option value="H" selected>Hombre</option>
+					</select>
+											
+					<h4 class="text-danger" th:if="${error!=null}" th:text="${'Alumno (NIF) existente'}"></h4>	
+					
+					<input type="submit" class="btn btn-primary w-100 mt-3" value="AÑADIR" />	
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

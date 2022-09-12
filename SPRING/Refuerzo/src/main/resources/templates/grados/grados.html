@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Grados')"></head>
+<body>
+	<header th:insert="fragments/parts::menu"></header>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+
+			<div class="col-12">
+				<h1 class="text-center mt-3">Grados</h1>
+
+				<a sec:authorize="hasRole('ROLE_ADMIN')"
+					th:href="@{../grados/addGrado}"
+					class="btn btn-primary btn-lg active" role="button">Añadir
+					Grado</a>
+				 <a sec:authorize="hasRole('ROLE_ADMIN')"
+					th:href="@{../grados/addAsigGrado}"
+					class="btn btn-primary btn-lg active" role="button">Asignar
+					 Asignatura a Grado</a>
+					 
+					 
+			
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>ID</th>
+							<th>Nombre</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="g : ${grados}">
+							<td th:text="${g.getId()}"></td>
+							<td th:text="${g.getNombre()}"></td>
+
+							<td><a
+								th:href="@{'/grados/asignaturas?codigo='+${g.getId()}}"><i class="bi bi-journal-bookmark-fill"></i></a></td>
+
+							<td><a th:href="@{'/grados/edit?grad='+${g.getId()}}"><i
+									class="bi bi-pen-fill"></i></a></td>
+							
+							<td><a th:href="@{'/grados/delete?grado='+${g.getId()}}"><i
+									class="bi bi-trash-fill"></i> </a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

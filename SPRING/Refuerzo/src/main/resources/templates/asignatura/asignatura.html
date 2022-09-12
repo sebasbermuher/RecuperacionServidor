@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Asignaturas')"></head>
+<body>
+	<header th:insert="fragments/parts::menu"></header>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+
+			<div class="col-12">
+				<h1 class="text-center mt-3">Asignaturas</h1>
+				
+				<a sec:authorize="hasRole('ROLE_ADMIN')"
+					th:href="@{../asignaturas/addAsignatura}"
+					class="btn btn-primary btn-lg active" role="button">Añadir
+					Asignatura</a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')"
+					th:href="@{../profesores/addAsigProf}"
+					class="btn btn-primary btn-lg active" role="button">Asignar
+					Profesor a Asignatura</a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')"
+					th:href="@{../grados/addAsigGrado}"
+					class="btn btn-primary btn-lg active" role="button">Asignar
+					 Asignatura a Grado</a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')"
+					th:href="@{../asignaturas/asignarAlumno}"
+					class="btn btn-danger btn-lg active" role="button">Asignar
+					Alumno a Asignatura</a>
+					
+					
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>ID</th>
+							<th>Nombre</th>
+							<th>Créditos</th>
+							<th>Tipo</th>
+							<th>Curso</th>
+							<th>Cuatrimestre</th>
+							<th>Profesor</th>
+							<th>Grado</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="a : ${asignatura}">
+							<td th:text="${a.getId()}"></td>
+							<td th:text="${a.getNombre()}"></td>
+							<td th:text="${a.getCreditos()}"></td>
+							<td th:text="${a.getTipo()}"></td>
+							<td th:text="${a.getCurso()}"></td>
+							<td th:text="${a.getCuatrimestre()}"></td>
+							<td
+								th:text="(${a.profesor} != null) ? |${a.profesor.nombre} ${a.profesor.apellido1}| : '' ">
+							</td>
+							<td th:text="(${a.grado} != null) ? |${a.grado.nombre}| : 'X' ">
+							</td>
+
+							<td><a
+								th:href="@{'/asignaturas/alumnos?codigo='+${a.getId()}}"><i
+									class="bi bi-people-fill"></i></a></td>
+
+							<td><a th:href="@{'/asignaturas/edit?asig='+${a.getId()}}"><i
+									class="bi bi-pen-fill"></i></a></td>
+									
+							<td><a th:href="@{'/asignaturas/profesores?codigo='+${a.getId()}}"><i class="bi bi-person-bounding-box"></i></a></td>
+							
+							<td><a th:href="@{'/asignaturas/delete?asignatura='+${a.getId()}}"><i
+									class="bi bi-trash-fill"></i> </a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

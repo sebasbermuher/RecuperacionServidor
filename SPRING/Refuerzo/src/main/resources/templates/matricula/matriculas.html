@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Matriculas')"></head>
+<body>
+	<header th:insert="fragments/parts::menu"></header>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+
+			<div class="col-12">
+				<h1 class="text-center mt-3">Matricula</h1>
+				<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{../matriculas/addMatricula}" class="btn btn-primary btn-lg active" role="button">Añadir Matricula</a>
+				
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>Alumno</th>
+							<th>Asignatura</th>
+							<th>Nota</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="a : ${alumnoAsignatura}">
+							<td
+								th:text="${a.alumno.getNombre()+' ' + a.alumno.getApellido1()+' ' + a.alumno.getApellido2()}"></td>
+							<td th:text="${a.asignatura.getNombre()}"></td>
+							<td th:text="${a.nota}"></td>
+							<td><a th:href="@{|/matriculas/delete?asignatura=${a.asignatura.getId()}&alumno=${a.alumno.getId()}}|"><i
+									class="bi bi-trash-fill"></i> </a></td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>
